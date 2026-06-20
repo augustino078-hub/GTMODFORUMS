@@ -31,3 +31,11 @@ This is not a ban tool. It does not enforce server authority, kick, ban, or clai
 - `GorillaTagPhotonStateSource : IPhotonStateSource`
 
 Drop the built `GorillaTagAntiCheat.Runtime.dll` into your Gorilla Tag BepInEx plugins folder. The mod creates a persistent `AntiCheatManager`, attaches the debug overlay, and uses reflection-based Gorilla Tag/Photon observation so it can run without bundling Photon or game assemblies.
+
+## Desktop detection UI
+
+The mod writes live desktop telemetry to:
+
+`BepInEx/config/GorillaTagAntiCheat/detections.jsonl`
+
+Run `GorillaTagAntiCheatDesktopViewer.exe` from `DesktopViewer` builds to tail that file. The viewer shows each player's suspicion score, movement/tag/network/metadata category scores, flagged state, latest violation, evidence, and a scrolling detection log.

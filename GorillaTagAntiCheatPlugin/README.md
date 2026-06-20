@@ -39,3 +39,14 @@ The mod writes live desktop telemetry to:
 `BepInEx/config/GorillaTagAntiCheat/detections.jsonl`
 
 Run `GorillaTagAntiCheatDesktopViewer.exe` from `DesktopViewer` builds to tail that file. The viewer shows each player's suspicion score, movement/tag/network/metadata category scores, flagged state, latest violation, evidence, and a scrolling detection log.
+
+## In-game Gorilla Tag HUD
+
+The mod includes an in-game VR HUD (`InGameDetectionHud`) that follows the main camera inside Gorilla Tag.
+
+Controls:
+
+- `F6`: toggle the compact in-game detection HUD.
+- `F8`: toggle the larger debug overlay.
+
+The HUD shows top suspicious players, final score, movement/tag/network/metadata category scores, flag status, latest violation, and evidence directly in-game.

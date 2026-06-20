@@ -8,6 +8,7 @@ namespace GorillaTagAntiCheat
     {
         private AntiCheatManager manager;
         private AntiCheatDebugOverlay overlay;
+        private InGameDetectionHud inGameHud;
         private GorillaTagPhotonStateSource stateSource;
         private DesktopTelemetryWriter telemetryWriter;
 
@@ -18,11 +19,13 @@ namespace GorillaTagAntiCheat
 
             manager = root.AddComponent<AntiCheatManager>();
             overlay = root.AddComponent<AntiCheatDebugOverlay>();
+            inGameHud = root.AddComponent<InGameDetectionHud>();
             stateSource = new GorillaTagPhotonStateSource();
             telemetryWriter = new DesktopTelemetryWriter();
 
             manager.SetStateSource(stateSource);
             overlay.Attach(manager);
+            inGameHud.Attach(manager);
             manager.PlayerFlagged += OnPlayerFlagged;
 
             Logger.LogInfo(PluginInfo.Name + " loaded. This mod only highlights suspicious behavior; it does not ban or kick players.");

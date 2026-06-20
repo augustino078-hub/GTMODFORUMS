@@ -1,3 +1,4 @@
+using System;
 using BepInEx;
 using UnityEngine;
 
@@ -14,22 +15,32 @@ namespace GorillaTagAntiCheat
 
         private void Awake()
         {
-            GameObject root = new GameObject("GorillaTagAntiCheat");
-            DontDestroyOnLoad(root);
+            Logger.LogInfo(PluginInfo.Name + " starting...");
 
-            manager = root.AddComponent<AntiCheatManager>();
-            overlay = root.AddComponent<AntiCheatDebugOverlay>();
-            inGameHud = root.AddComponent<InGameDetectionHud>();
-            stateSource = new GorillaTagPhotonStateSource();
-            telemetryWriter = new DesktopTelemetryWriter();
+            try
+            {
+                GameObject root = new GameObject("GorillaTagAntiCheat");
+                DontDestroyOnLoad(root);
 
-            manager.SetStateSource(stateSource);
-            overlay.Attach(manager);
-            inGameHud.Attach(manager);
-            manager.PlayerFlagged += OnPlayerFlagged;
+                manager = root.AddComponent<AntiCheatManager>();
+                overlay = root.AddComponent<AntiCheatDebugOverlay>();
+                inGameHud = root.AddComponent<InGameDetectionHud>();
+                stateSource = new GorillaTagPhotonStateSource();
+                telemetryWriter = new DesktopTelemetryWriter();
 
-            Logger.LogInfo(PluginInfo.Name + " loaded. This mod only highlights suspicious behavior; it does not ban or kick players.");
-            Logger.LogInfo("Desktop telemetry: " + telemetryWriter.TelemetryPath);
+                manager.SetStateSource(stateSource);
+                overlay.Attach(manager);
+                inGameHud.Attach(manager);
+                manager.PlayerFlagged += OnPlayerFlagged;
+
+                Logger.LogInfo(PluginInfo.Name + " loaded. F6 toggles the in-game detection HUD; F8 toggles the debug overlay.");
+                Logger.LogInfo("Desktop telemetry: " + telemetryWriter.TelemetryPath);
+            }
+            catch (Exception exception)
+            {
+                Logger.LogError(PluginInfo.Name + " failed to initialize: " + exception);
+                throw;
+            }
         }
 
         private void Update()

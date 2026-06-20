@@ -22,3 +22,12 @@ This is not a ban tool. It does not enforce server authority, kick, ban, or clai
 - Low-GC update path using reusable buffers and bounded histories.
 - Per-lobby adjustable thresholds through `AntiCheatSettings`.
 - False-positive protection: ping normalization, join grace period, interpolation tolerance, decay, and multi-signal confirmation.
+
+## BepInEx/Gorilla Tag mod DLL
+
+`GorillaTagAntiCheatPlugin` now includes a BepInEx plugin entrypoint:
+
+- `GorillaTagAntiCheatPlugin : BaseUnityPlugin`
+- `GorillaTagPhotonStateSource : IPhotonStateSource`
+
+Drop the built `GorillaTagAntiCheat.Runtime.dll` into your Gorilla Tag BepInEx plugins folder. The mod creates a persistent `AntiCheatManager`, attaches the debug overlay, and uses reflection-based Gorilla Tag/Photon observation so it can run without bundling Photon or game assemblies.
